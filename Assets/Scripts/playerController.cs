@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    [SerializeField]private float Speed = 5f;
-    [SerializeField]private float JumpForce = 10f;
+    [SerializeField]private float Speed = 3f;
+    [SerializeField]private float JumpForce = 6f;
 
     private Rigidbody2D rb;
     private Animator anim;
 
-    
-
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask Ground;
-    
+
+    public bool facingRight = true;
 
     void Start()
     {
@@ -26,6 +25,7 @@ public class playerController : MonoBehaviour
     void Update()
     {
         AnimationController();
+        FlipController();
 
         float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * Speed, rb.velocity.y);
@@ -39,6 +39,8 @@ public class playerController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
+
+        
     }
     private bool IsGrounded()
     {
@@ -46,10 +48,20 @@ public class playerController : MonoBehaviour
     }
     private void AnimationController()
     {
-        bool isMoving = rb.velocity.x != 0;
-        anim.SetBool("isMoving", isMoving);
-
+        anim.SetFloat("xSpeed", rb.velocity.x);
         anim.SetFloat("ySpeed", rb.velocity.y);
         anim.SetBool("isGrounded", IsGrounded());
+    }
+    private void FlipController()
+    {
+        if (rb.velocity.x < 0 && facingRight)
+            Flip();
+        else if (rb.velocity.x > 0 && !facingRight)
+            Flip();
+    }
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
     }
 }
