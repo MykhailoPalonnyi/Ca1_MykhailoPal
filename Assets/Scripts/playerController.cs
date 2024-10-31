@@ -15,10 +15,15 @@ public class playerController : MonoBehaviour
 
     public bool facingRight = true;
 
+    AudioSource jumpSound;
+
+    public GameController gc;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim=GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+        jumpSound = GetComponent<AudioSource>();
     }
 
     
@@ -32,6 +37,7 @@ public class playerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            jumpSound.Play();
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
         }
 
@@ -63,5 +69,17 @@ public class playerController : MonoBehaviour
     {
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Gem"))
+        {
+            Destroy(collision.gameObject);
+            gc.gemCount++;
+            if (gc.gemCount == 3)
+            {
+                Time.timeScale = 0;
+            }
+        }
     }
 }
