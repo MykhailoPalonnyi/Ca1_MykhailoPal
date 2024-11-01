@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
@@ -19,11 +20,14 @@ public class playerController : MonoBehaviour
 
     public GameController gc;
 
+    [SerializeField] public TMP_Text levelText;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         jumpSound = GetComponent<AudioSource>();
+        
     }
 
     
@@ -78,7 +82,9 @@ public class playerController : MonoBehaviour
             gc.gemCount++;
             if (gc.gemCount == 3)
             {
+                levelText.enabled = true;
                 Time.timeScale = 0;
+                
             }
         }
     }
