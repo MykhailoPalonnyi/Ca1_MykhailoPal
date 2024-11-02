@@ -20,7 +20,7 @@ public class playerController : MonoBehaviour
 
     public GameController gc;
 
-    [SerializeField] public TMP_Text levelText;
+    [SerializeField] public TMP_Text winText;
 
     void Start()
     {
@@ -82,7 +82,7 @@ public class playerController : MonoBehaviour
             gc.gemCount++;
             if (gc.gemCount == 3)
             {
-                levelText.enabled = true;
+                winText.gameObject.SetActive(true);
                 Time.timeScale = 0;
                 
             }
