@@ -53,21 +53,27 @@ public class playerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);//add jump velocity
         }
 
-        
+        //hhort jump reduces up force if jump button released early
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
 
         
     }
+    //checks if the player is grounded 
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.1f, Ground);
     }
+    //updates animator parameters 
     private void AnimationController()
     {
         anim.SetFloat("xSpeed", rb.velocity.x);
         anim.SetFloat("ySpeed", rb.velocity.y);
         anim.SetBool("isGrounded", IsGrounded());
     }
-
+    //checks if player changed his direction
     private void FlipController()
     {
         if (rb.velocity.x < 0 && facingRight)
@@ -75,6 +81,7 @@ public class playerController : MonoBehaviour
         else if (rb.velocity.x > 0 && !facingRight)
             Flip();
     }
+    //flips the character based 
     private void Flip()
     {
         facingRight = !facingRight;
@@ -86,10 +93,12 @@ public class playerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             gc.gemCount++;
+
+            //checks if all gems collected
             if (gc.gemCount == 3)
             {
-                winText.gameObject.SetActive(true);
-                Time.timeScale = 0;
+                winText.gameObject.SetActive(true);//display win text
+                Time.timeScale = 0;//pause the game
                 
             }
         }
