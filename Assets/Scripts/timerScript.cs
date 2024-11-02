@@ -10,8 +10,10 @@ public class Timerscript : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
+        //calculates the minutes and seconds
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
+        // Update the timer text to show minutes and seconds in "MM:SS" format
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
     }
