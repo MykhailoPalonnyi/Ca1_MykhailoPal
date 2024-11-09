@@ -8,7 +8,7 @@ public class playerController : MonoBehaviour
     [SerializeField]private float Speed = 3f;
     [SerializeField]private float JumpForce = 6f;
 
-    //Rigidbody for controlling physics and Animator for animation
+    //rigidbody for controlling physics and Animator for animation
     private Rigidbody2D rb;
     private Animator anim;
 
@@ -24,15 +24,17 @@ public class playerController : MonoBehaviour
 
     //reference to GameController script for tracking gem count
     public GameController gc;
+    public Timerscript timerScript;
 
     //text to display when the player wins
     [SerializeField] public TMP_Text winText;
+   
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); //get Rigidbody2D component for physics
         anim = GetComponent<Animator>();  //get Animator component for animations
-        jumpSound = GetComponent<AudioSource>(); //get AudioSource component for sound effects
+        jumpSound = GetComponent<AudioSource>(); //get AudioSource component for sound effect
 
     }
 
@@ -97,9 +99,13 @@ public class playerController : MonoBehaviour
             //checks if all gems collected
             if (gc.gemCount == 3)
             {
-                winText.gameObject.SetActive(true);//display win text
-                Time.timeScale = 0;//pause the game
-                
+                timerScript.isLevelCompleted = true; // Stop the timer
+                timerScript.SaveBestTime(); // Save best time
+                winText.gameObject.SetActive(true);
+                Time.timeScale = 0; // Pause the game
+
+
+
             }
         }
     }

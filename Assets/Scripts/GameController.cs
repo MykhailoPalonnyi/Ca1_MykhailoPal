@@ -46,5 +46,6 @@ public class GameController : MonoBehaviour
         spriteRenderer.enabled = true; //turn on Rigidbody simulation
         rb.simulated = true; //turn on spriteRenderer simulation
     }
+
     
 }
