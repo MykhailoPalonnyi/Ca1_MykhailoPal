@@ -25,7 +25,15 @@ public class movingPlatform : MonoBehaviour
         }
         
     }
-    
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        collision.transform.SetParent(transform);
+    }
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        collision.transform.SetParent(null);
+    }
+
 }
 
    

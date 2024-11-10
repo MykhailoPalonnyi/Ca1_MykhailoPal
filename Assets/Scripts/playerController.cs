@@ -99,10 +99,10 @@ public class playerController : MonoBehaviour
             //checks if all gems collected
             if (gc.gemCount == 3)
             {
-                timerScript.isLevelCompleted = true; // Stop the timer
-                timerScript.SaveBestTime(); // Save best time
-                winText.gameObject.SetActive(true);
-                Time.timeScale = 0; // Pause the game
+                timerScript.isLevelCompleted = true; // stop the timer
+                timerScript.SaveBestTime(); // save best time
+                winText.gameObject.SetActive(true); //activate winning text and button
+                Time.timeScale = 0; // pause the game
 
 
 

@@ -31,7 +31,7 @@ public class Timerscript : MonoBehaviour
     void Update()
     {
         
-        if (!isLevelCompleted) // Only update time if the level is not completed
+        if (!isLevelCompleted) // only update time if the level is not completed
         {
             time += Time.deltaTime;
         //calculates the minutes and seconds
@@ -53,8 +53,8 @@ public class Timerscript : MonoBehaviour
     }
     public void RestartLevel()
     {
-        Time.timeScale = 1; // Unpause the game
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Restart the current level
+        Time.timeScale = 1; // unpause the game
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // restart the current level
     }
 
 }
