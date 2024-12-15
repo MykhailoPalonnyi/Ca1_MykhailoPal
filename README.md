@@ -1,2 +1,2 @@
-# Ca1_MykhailoPal
-open Game to play folder, launch Ca1_Mykhailo
+# Ca2_MykhailoPal
+launch index.html to play, movement is left/right/up key
